@@ -1,0 +1,9 @@
+<h3 class="my-4 text-xl font-medium tracking-wider">Alarmes</h3>
+<div class="flex justify-center">
+
+    <app-tabela-alarmes [alarmes]="alarmes" (aoExcluir)="getAlarmes()"></app-tabela-alarmes>
+
+    <div class="block md:hidden w-full">
+        <app-accordion-alarme *ngFor="let alarme of alarmes" [alarme]="alarme" (aoExcluir)="getAlarmes()"></app-accordion-alarme>
+    </div>
+</div>

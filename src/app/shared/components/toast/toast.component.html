@@ -1,0 +1,22 @@
+<div class="fixed top-10 right-0 overflow-hidden z-50 mx-2 md:mx-0">
+    <div class="flex md:mr-8 transform duration-500 ease-in-out p-3 shadow-2xl rounded w-full md:w-80 max-h-20"
+        [ngClass]="{'translate-x-0' : show, 'translate-x-200' : !show, 'bg-red-400' : tipo === 'danger', 'bg-yellow-400' : tipo === 'warn', 'bg-green-400' : tipo === 'success' }">
+        <div class="bg-white flex items-center p-3 rounded mr-4 ring-2 ring-gray-300">
+            <svg *ngIf="tipo === 'success'" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <svg *ngIf="tipo === 'warn'" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01" />
+            </svg>
+            <svg *ngIf="tipo === 'danger'" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+        </div>
+        <div class="text-white text-left flex items-center font-medium ">
+            {{texto}}
+        </div>
+    </div>
+</div>

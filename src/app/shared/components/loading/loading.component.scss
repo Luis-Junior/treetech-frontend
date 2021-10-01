@@ -1,0 +1,40 @@
+.loading {
+    margin: 0;
+    background: linear-gradient(270deg,
+    #065f46,
+    #059669,
+    #10b981,
+    #34d399,
+    #6ee7b7,
+    #a7f3d0,
+    #d1fae5,
+    );
+    animation: progress 2s ease;
+    height: 0.2em;
+  }
+  
+  @keyframes progress {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+  }
+  
+  .stopped {
+    display: none;
+  }
+  .greens {
+    // background-color: #ecfdf5;
+    // background-color: #d1fae5;
+    background-color: #a7f3d0;
+    background-color: #6ee7b7;
+    background-color: #34d399;
+    background-color: #10b981;
+    background-color: #059669;
+    background-color: #047857;
+    background-color: #065f46;
+    background-color: #064e3b;
+  }
+  

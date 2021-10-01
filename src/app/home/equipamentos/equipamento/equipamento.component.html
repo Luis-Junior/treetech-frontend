@@ -1,0 +1,89 @@
+<h3 class="my-4 text-xl font-medium tracking-wider capitalize">{{equipamento?.nome}}</h3>
+
+<div class="bg-gray-50 py-8 px-4 shadow-sm rounded-md">
+
+    <form class="w-full flex flex-col md:max-w-screen-md" *ngIf="equipamentoForm" [formGroup]="equipamentoForm">
+
+        <span class="pl-4 pb-6 font-bold text-lg">ID : {{equipamento?.id}}</span>
+        <input type="number" formControlName="id" class="hidden" hidden>
+        <div class="md:flex md:items-center mb-6">
+            <div class="w-1/6">
+                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="nome">Nome</label>
+            </div>
+            <div class="md:w-5/6">
+                <input formControlName="nome" [ngClass]="{'border-red-500' :equipamentoForm.get('nome')?.errors}"
+                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
+                    id="nome" type="text">
+            </div>
+        </div>
+
+        <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/6 self-start">
+                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                    for="descricao">Descrição</label>
+            </div>
+            <div class="md:w-5/6">
+                <textarea formControlName="descricao" [ngClass]="{'border-red-500' :equipamentoForm.get('descricao')?.errors}"
+                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500 resize-none"
+                    id="descricao" type="text"></textarea>
+            </div>
+        </div>
+
+        <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/6">
+                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="numero_serie">Nº de
+                    serie</label>
+            </div>
+            <div class="md:w-5/6">
+                <input formControlName="numero_serie" [ngClass]="{'border-red-500' :equipamentoForm.get('numero_serie')?.errors}"
+                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
+                    
+                    id="numero_serie" type="text">
+            </div>
+        </div>
+
+        <div class="md:flex md:items-center mb-6">
+            <div class="md:w-1/6">
+                <span class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">Tipo</span>
+            </div>
+            <div class="md:w-5/6 md:mx-12 flex justify-center">
+                <label [ngClass]="{'bg-dark ring-4 ring-red-400':equipamentoForm.get('tipo_id')?.value == 1}"
+                    for="tensao"
+                    class="flex-1 text-center bg-red-300 p-2 rounded-md text-white font-medium hover:bg-red-400 cursor-pointer">Tensão</label>
+                <label [ngClass]="{'bg-dark ring-4 ring-yellow-400':equipamentoForm.get('tipo_id')?.value == 2}"
+                    for="corrente"
+                    class="flex-1 text-center mx-2 bg-yellow-300 p-2 rounded-md text-white font-medium hover:bg-yellow-400 cursor-pointer">Corrente</label>
+                <label [ngClass]="{'bg-dark ring-4 ring-green-400':equipamentoForm.get('tipo_id')?.value == 3}"
+                    for="oleo"
+                    class="flex-1 text-center bg-green-300 p-2 rounded-md text-white font-medium hover:bg-green-400 cursor-pointer">Oleo</label>
+            </div>
+            <input class="hidden" type="radio" formControlName="tipo_id" value="1" id="tensao">
+            <input class="hidden" type="radio" formControlName="tipo_id" value="2" id="corrente">
+            <input class="hidden" type="radio" formControlName="tipo_id" value="3" id="oleo">
+        </div>
+
+        <div class="md:flex md:items-center flex justify-center md:justify-end">
+            <button [disabled]="equipamentoForm.invalid" (click)="update()" [ngClass]="{'disabled:opacity-50 cursor-default': equipamentoForm.invalid}"
+                class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-8 rounded"
+                type="button">
+                Update
+            </button>
+        </div>
+    </form>
+
+</div>
+<h3 class="my-4 text-xl font-medium tracking-wider capitalize">Alarmes Relacionados</h3>
+
+<div class="bg-gray-50 px-4 shadow-sm rounded-md flex justify-center">
+
+    <app-tabela-alarmes [alarmes]="alarmesRelacionados"></app-tabela-alarmes>
+
+    <div class="block md:hidden w-full">
+        <app-accordion-alarme *ngFor="let alarme of alarmesRelacionados" [alarme]="alarme"></app-accordion-alarme>
+    </div>
+
+    <ng-template #semAlarmes>
+        <span class="font-bold text-xl m-6">Não há nenhum alarme relacionado a este equipamento</span>
+    </ng-template>
+
+</div>

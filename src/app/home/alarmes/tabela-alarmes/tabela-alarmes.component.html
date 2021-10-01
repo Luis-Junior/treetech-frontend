@@ -1,0 +1,62 @@
+<table class="hidden md:block table-auto">
+    <thead>
+        <tr class="w-full bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+            <th class="py-3 px-6 text-left">id</th>
+            <th class="py-3 px-6 text-left">descrição</th>
+            <th class="py-3 px-6 text-center">Classificação</th>
+            <th class="py-3 px-6 text-center">Equipamento</th>
+            <th class="py-3 px-6 text-center">criado em</th>
+            <th class="py-3 px-6 text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody class="text-gray-600 text-sm font-light">
+        <tr *ngFor="let alarme of alarmes" class="border-b border-gray-200 hover:bg-gray-100">
+            <td class="py-3 px-6 text-left whitespace-nowrap">
+                <div class="flex items-center">
+                    <span class="font-medium">{{alarme.id}}</span>
+                </div>
+            </td>
+            <td class="py-3 px-6 text-left">
+                <div class="flex items-center">
+                    <span>{{alarme.descricao}}</span>
+                </div>
+            </td>
+            <td class="py-3 px-6 text-center">
+                <span class="text-white font-medium py-1 px-3 rounded-full text-xs" 
+                [ngClass]="{'bg-red-300' : alarme.classificacao.id === 3, 'bg-yellow-300' : alarme.classificacao.id === 2, 'bg-green-300' : alarme.classificacao.id === 1 }">
+                {{alarme.classificacao.classificacao}}</span>
+            </td>
+            <td class="py-3 px-6 text-center">
+                <div class="flex item-center justify-center">
+                    {{alarme.equipamento.nome}}
+                </div>
+            </td>
+            <td class="py-3 px-6 text-center">
+                <div class="flex items-center justify-center">
+                    {{ alarme.creat_at| date: 'dd/MM/YYYY - h:mm'}}
+                </div>
+            </td>
+            <td class="py-3 px-6 text-center">
+                <div class="flex item-center justify-center cursor-pointer">
+                    <div class="w-4 mr-2 transform hover:text-green-400 hover:scale-110">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                    </div>
+                    <div class="w-4 mr-2 transform hover:text-green-400 hover:scale-110 cursor-pointer" (click)="delete(alarme.id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
