@@ -6,6 +6,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { PageIndicatorModule } from '../shared/components/page-indicator/page-indicator.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { InicioComponent } from './inicio/inicio.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    EquipamentosModule
+    EquipamentosModule,
+    PageIndicatorModule
   ]
 })
 export class HomeModule { }

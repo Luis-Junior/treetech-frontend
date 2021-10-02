@@ -11,15 +11,18 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: InicioComponent
+        component: InicioComponent,
+        data:{
+          title: 'Home'
+        }
       },
       {
         path: 'equipamentos',
-        loadChildren:()=>import('./equipamentos/equipamentos.module').then((m)=>m.EquipamentosModule)
+        loadChildren:()=>import('./equipamentos/equipamentos.module').then((m)=>m.EquipamentosModule),
       },
       {
         path: 'alarmes',
-        loadChildren:()=>import('./alarmes/alarmes.module').then((m)=>m.AlarmesModule)
+        loadChildren:()=>import('./alarmes/alarmes.module').then((m)=>m.AlarmesModule),
       }
     ]
   }

@@ -8,7 +8,10 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    component:EquipamentosComponent
+    component:EquipamentosComponent,
+    data:{
+      title: 'Listagem de equipamentos'
+    }
   },
   {
     path: ':id',
@@ -16,6 +19,9 @@ const routes: Routes = [
     resolve: {
       equipamento: EquipamentoResolver,
       alarmesRelacionados: AlarmesRelacionadosResolver
+    },
+    data:{
+      title: 'Equipamento'
     }
   }
 ];

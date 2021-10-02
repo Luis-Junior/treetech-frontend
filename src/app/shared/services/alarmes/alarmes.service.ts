@@ -23,4 +23,8 @@ export class AlarmesService {
     return this.http.delete(`${API}/${id}`)
   }
 
+  getById(id:number){
+    return this.http.get<Alarme>(`${API}/${id}`)
+  }
+
 }
