@@ -1,13 +1,13 @@
-import { AtivarDesativarAlarmesComponent } from './ativar-desativar-alarmes.component';
+import { LogsComponent } from './logs.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    component: AtivarDesativarAlarmesComponent,
+    component: LogsComponent,
     data:{
-      title: 'Ativar/Desativar alarmes'
+      title: 'Logs do sistema'
     }
   }
 ];
@@ -16,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AtivarDesativarAlarmesRoutingModule { }
+export class LogsRoutingModule { }

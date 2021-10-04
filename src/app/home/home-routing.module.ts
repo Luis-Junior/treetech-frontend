@@ -27,6 +27,10 @@ const routes: Routes = [
       {
         path: 'ativar-desativar-alarmes',
         loadChildren:()=>import('./ativar-desativar-alarmes/ativar-desativar-alarmes.module').then((m)=>m.AtivarDesativarAlarmesModule)
+      },
+      {
+        path: 'logs',
+        loadChildren:()=>import('./logs/logs.module').then((m)=>m.LogsModule)
       }
     ]
   }

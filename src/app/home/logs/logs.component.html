@@ -1,0 +1,102 @@
+
+<div class= " hidden md:flex md:justify-between md:items-center">
+    <h3 class="my-4 text-xl font-medium tracking-wider">Ativar/Desativar alarmes</h3>
+    <div class="flex flex-grow items-center md:flex-grow-0">
+        <svg [ngClass]="{'text-green-500': filter.value?.length}" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input [formControl]="filter" placeholder="Buscar" class="bg-gray-200 w-full appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500" id="" type="text">
+    </div>
+</div>
+<div class="flex justify-center">
+
+    <table class="hidden md:block table-auto" *ngIf="logs.length; else semLogs">
+        <thead>
+            <tr class="w-full bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                <th class="py-3 px-6 text-center">
+                    <div class="flex items-center">
+                        <span>Id
+                        </span>
+                        <app-order-switcher ordenarPor="id" (aoAlterar)="getLogs($event)"></app-order-switcher>
+                    </div>
+                </th>
+                <th class="py-3 px-6 text-center">
+                    <div class="flex items-center">
+                        <span>Acao</span>
+                        <app-order-switcher ordenarPor="acao" (aoAlterar)="getLogs($event)"></app-order-switcher>
+                    </div>
+                </th>
+                <th class="py-3 px-6 text-center">
+                    <div class="flex items-center">
+                        <span>Dados Acessados</span>
+                        <app-order-switcher ordenarPor="dados_acessados" (aoAlterar)="getLogs($event)"></app-order-switcher>
+                    </div>
+                </th>
+                <th class="py-3 px-6 text-center">
+                    <div class="flex items-center">
+                        <span>dados_alterados</span>
+                        <app-order-switcher ordenarPor="dados_alterados" (aoAlterar)="getLogs($event)"></app-order-switcher>
+                    </div>
+                </th>
+                <th class="py-3 px-6 text-center">
+                    <div class="flex items-center">
+                        <span>rota</span>
+                        <app-order-switcher ordenarPor="rota" (aoAlterar)="getLogs($event)"></app-order-switcher>
+                    </div>
+                </th>
+                <th class="py-3 px-6 text-center">
+                    <div class="flex items-center">
+                        <span>data</span>
+                        <app-order-switcher ordenarPor="data" (aoAlterar)="getLogs($event)"></app-order-switcher>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="text-gray-600 text-sm font-light">
+            <tr *ngFor="let log of logs | filterLog:filter.value" class="border-b border-gray-200 hover:bg-gray-100">
+                <td class="py-3 px-6 text-left whitespace-nowrap">
+                    <div class="flex items-center">
+                        <span class="font-medium">{{log.id}}</span>
+                    </div>
+                </td>
+                <td class="py-3 px-6 text-left">
+                    <div class="flex items-center">
+                        <span>{{log.acao}}</span>
+                    </div>
+                </td>
+                <td class="py-3 px-6 text-left">
+                    <div class="flex items-center justify-center">
+                        <span>{{log.dados_acessados.substring(0,15)}}</span>
+                    </div>
+                </td>
+                
+                <td class="py-3 px-6 text-left">
+                    <div class="flex item-center justify-center">
+                        <span>{{log.dados_alterados.substring(0,15)}}</span>                        
+                    </div>
+                </td>
+                <td class="py-3 px-6 text-left">
+                    <div class="flex items-center justify-center">
+                        <span>{{log.rota}}</span>                        
+                    </div>
+                </td>
+                <td class="py-3 px-6 text-center">
+                    <div class="flex item-center justify-center">
+                        <span>{{log.data | date: 'dd/MM/YYYY - h:mm'}}</span>                        
+                    </div>
+                </td>
+            </tr>
+    
+        </tbody>
+    </table>
+    <ng-template #semLogs>
+        <span class="font-medium text-lg mt-4 text-center">
+            Ainda não há alarme logs no sistema
+        </span>
+    </ng-template>
+    <!-- <div class="block md:hidden w-full" *ngIf="alarmes.length;">
+        <app-accordion-desativar-atiavar-alarmes *ngFor="let alarme of alarmes | filterAlarme:filterByDescriptionInput.value" [alarme]="alarme" (aoAlterarStatus)="switchAlarme($event.status_id, $event.alarme_id)"></app-accordion-desativar-atiavar-alarmes>
+    </div> -->
+
+
+</div>
