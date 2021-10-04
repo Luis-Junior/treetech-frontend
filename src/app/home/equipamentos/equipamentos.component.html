@@ -1,9 +1,17 @@
-<h3 class="my-4 text-xl font-medium tracking-wider">Equipamentos</h3>
+<div class="md:flex md:justify-between md:items-center">
+    <h3 class="my-4 text-xl font-medium tracking-wider">Equipamentos</h3>
+    <div class="flex flex-grow items-center md:flex-grow-0">
+        <svg [ngClass]="{'text-green-500': filterByDescriptionInput.value?.length}" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input [formControl]="filterByDescriptionInput" placeholder="Buscar" class="bg-gray-200 w-full appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500" id="" type="text">
+    </div>
+</div>
 <div class="flex justify-center">
     
-    <app-tabela-equipamentos [equipamentos]="equipamentos" (aoExcluir)="getEquipamentos()"></app-tabela-equipamentos>
+    <app-tabela-equipamentos [equipamentos]="equipamentos | filterEquipamento:filterByDescriptionInput.value" (aoExcluir)="getEquipamentos()"></app-tabela-equipamentos>
     
     <div class="block md:hidden w-full">
-        <app-accordion-equipamento *ngFor="let equipamento of equipamentos" [equipamento]="equipamento" (aoExcluir)="getEquipamentos()"></app-accordion-equipamento>
+        <app-accordion-equipamento *ngFor="let equipamento of equipamentos | filterEquipamento:filterByDescriptionInput.value" [equipamento]="equipamento" (aoExcluir)="getEquipamentos()"></app-accordion-equipamento>
     </div>
 </div>

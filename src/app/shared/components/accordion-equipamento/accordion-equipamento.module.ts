@@ -1,20 +1,21 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PageIndicatorComponent } from './page-indicator.component';
+
+import { AccordionEquipamentoComponent } from './accordion-equipamento.component';
 
 
 
 @NgModule({
   declarations: [
-    PageIndicatorComponent
+    AccordionEquipamentoComponent
   ],
   imports: [
     CommonModule,
     RouterModule
   ],
   exports:[
-    PageIndicatorComponent
+    AccordionEquipamentoComponent
   ]
 })
-export class PageIndicatorModule { }
+export class AccordionEquipamentoModule { }

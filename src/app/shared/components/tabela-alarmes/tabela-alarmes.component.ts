@@ -1,9 +1,12 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { ToastType } from 'src/app/shared/components/toast/toast';
-import { ToastService } from 'src/app/shared/components/toast/toast.service';
-import { Alarme } from 'src/app/shared/services/alarmes/Alarme';
-import { AlarmesService } from 'src/app/shared/services/alarmes/alarmes.service';
+import { Alarme } from '../../services/alarmes/Alarme';
+import { AlarmesService } from '../../services/alarmes/alarmes.service';
+import { ToastType } from '../toast/toast';
+import { ToastService } from '../toast/toast.service';
+
+
 
 @Component({
   selector: 'app-tabela-alarmes',
@@ -30,5 +33,19 @@ export class TabelaAlarmesComponent implements OnInit {
         ()=>this.toastService.showToast('Alarme excluido com sucesso', ToastType.SUCESSO),
         (erro)=>this.toastService.showToast('Erro ao excluir alarme', ToastType.PERIGO)
         )
+  }
+  getAlarmes(params:HttpParams){
+    this.alarmesService.getAll(params).subscribe(
+      alarmes=>this.alarmes = alarmes
+    )
+  }
+
+  filtrarPorClassificacao(classificacao_id:number){
+    if(classificacao_id === 0){
+      let params = new HttpParams()
+      this.getAlarmes(params)
+    }else{
+      this.alarmesService.filterByClassificacao(classificacao_id).subscribe(alarmes=>this.alarmes=alarmes)
+    }
   }
 }

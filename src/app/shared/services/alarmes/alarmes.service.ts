@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Alarme } from './Alarme';
@@ -15,8 +15,8 @@ export class AlarmesService {
   ) { }
 
 
-  getAll(){
-    return this.http.get<Alarme[]>(API)
+  getAll(params?:HttpParams){
+    return this.http.get<Alarme[]>(API,{params})
   }
   
   delete(id:number){
@@ -25,6 +25,19 @@ export class AlarmesService {
 
   getById(id:number){
     return this.http.get<Alarme>(`${API}/${id}`)
+  }
+  
+  update(alarmeUpdate:any){
+    return this.http.put(`${API}/${alarmeUpdate.id}`, alarmeUpdate)
+  }
+
+  create(alarme:any){
+    return this.http.post(`${API}`, alarme)
+
+  }
+
+  filterByClassificacao(classificacao_id:number){
+    return this.http.get<Alarme[]>(`${API}/findByClassificacao/${classificacao_id}`)
   }
 
 }

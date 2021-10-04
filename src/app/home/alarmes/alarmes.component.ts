@@ -1,5 +1,7 @@
-import { AlarmesService } from './../../shared/services/alarmes/alarmes.service';
+import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+
+import { AlarmesService } from './../../shared/services/alarmes/alarmes.service';
 import { Alarme } from 'src/app/shared/services/alarmes/Alarme';
 
 @Component({
@@ -11,15 +13,23 @@ export class AlarmesComponent implements OnInit {
 
   alarmes: Alarme[] = []
 
+  filterByDescriptionInput = new FormControl() 
+
   constructor(
     private alarmesService: AlarmesService,
   ) { }
 
   ngOnInit(): void {
     this.getAlarmes()
+    this.filterByDescriptionInput.valueChanges.subscribe(
+      valorDigitado=>{
+        console.log(valorDigitado)
+      }
+    )
   }
 
   getAlarmes(){
+    this.filterByDescriptionInput.setValue('')
     this.alarmesService.getAll()
       .subscribe(alarmes=>this.alarmes=alarmes)
   }

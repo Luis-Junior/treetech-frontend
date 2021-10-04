@@ -1,3 +1,4 @@
+import { NovoEquipamentoComponent } from './novo-equipamento/novo-equipamento.component';
 import { AlarmesRelacionadosResolver } from './equipamento/alarmes-relacionados.resolver';
 import { EquipamentoResolver } from './equipamento/equipamento.resolver';
 import { EquipamentoComponent } from './equipamento/equipamento.component';
@@ -11,6 +12,13 @@ const routes: Routes = [
     component:EquipamentosComponent,
     data:{
       title: 'Listagem de equipamentos'
+    }
+  },
+  {
+    path: 'novo',
+    component: NovoEquipamentoComponent,
+    data:{
+      title: 'Novo equipamento'
     }
   },
   {

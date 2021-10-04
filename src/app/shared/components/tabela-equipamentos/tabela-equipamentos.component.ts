@@ -1,9 +1,13 @@
-import { ToastService } from './../../../shared/components/toast/toast.service';
-import { EquipamentosService } from './../../../shared/services/equipamentos/equipamentos.service';
-import { Equipamento } from './../../../shared/services/equipamentos/Equipamento';
+import { HttpParams } from '@angular/common/http';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { ToastType } from 'src/app/shared/components/toast/toast';
+
+import { Equipamento } from '../../services/equipamentos/Equipamento';
+import { EquipamentosService } from '../../services/equipamentos/equipamentos.service';
+import { ToastType } from '../toast/toast';
+import { ToastService } from '../toast/toast.service';
+
+
 
 @Component({
   selector: 'app-tabela-equipamentos',
@@ -13,6 +17,7 @@ import { ToastType } from 'src/app/shared/components/toast/toast';
 export class TabelaEquipamentosComponent implements OnInit {
 
   @Input() equipamentos: Equipamento[] = []
+  @Input() ocultarAcoes = false
 
   @Output() aoExcluir = new EventEmitter()
 
@@ -32,6 +37,21 @@ export class TabelaEquipamentosComponent implements OnInit {
         () => this.toastService.showToast('Equipamento excluido com sucesso', ToastType.SUCESSO),
         (erro) => this.toastService.showToast('Existe um alarme relacionado a este equipamento', ToastType.PERIGO)
       )
+  }
+
+  getEquipamentos(params:HttpParams){
+    this.equipamentosService.getAll(params).subscribe(
+      equipamentos=>this.equipamentos = equipamentos
+    )
+  }
+
+  filtrarPorTipo(tipo_id:number){
+    if(tipo_id === 0){
+      let params = new HttpParams()
+      this.getEquipamentos(params)
+    }else{
+      this.equipamentosService.filterByTipo(tipo_id).subscribe(equipamentos=>this.equipamentos=equipamentos)
+    }
   }
 
 }

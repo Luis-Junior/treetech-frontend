@@ -23,6 +23,10 @@ const routes: Routes = [
       {
         path: 'alarmes',
         loadChildren:()=>import('./alarmes/alarmes.module').then((m)=>m.AlarmesModule),
+      },
+      {
+        path: 'ativar-desativar-alarmes',
+        loadChildren:()=>import('./ativar-desativar-alarmes/ativar-desativar-alarmes.module').then((m)=>m.AtivarDesativarAlarmesModule)
       }
     ]
   }

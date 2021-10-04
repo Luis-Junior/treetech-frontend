@@ -1,14 +1,8 @@
-<div class="flex items-center justify-between">
-    <h3 class="my-4 text-xl font-medium tracking-wider">Alarme de id: {{alarme?.id}}</h3>
-    <div [ngClass]="{'bg-green-500': alarme.status.id == 1, 'bg-gray-400': alarme.status.id == 2}" class="px-6 py-2 rounded-full text-white text-xl font-medium ">{{alarme.status.status}}</div>
-</div>
+<h3 class="my-4 text-xl font-medium tracking-wider">Novo Alarme</h3>
 
 <div class="bg-gray-50 py-8 px-4 shadow-sm rounded-md">
 
     <form class="w-full flex flex-col md:max-w-screen-md" *ngIf="alarmeForm" [formGroup]="alarmeForm">
-
-        <span class="pl-4 pb-6 font-bold text-lg">ID : {{alarme?.id}}</span>
-        <input type="number" formControlName="id" class="hidden" hidden>
 
         <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/6 self-start">
@@ -17,7 +11,7 @@
             </div>
             <div class="md:w-5/6">
                 <textarea formControlName="descricao"
-                    [ngClass]="{'border-red-500' :alarmeForm.get('descricao')?.errors}"
+                    [ngClass]="{'border-red-500' :alarmeForm.get('descricao')?.errors && alarmeForm.get('descricao')?.touched}"
                     class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500 resize-none"
                     id="descricao" type="text"></textarea>
             </div>
@@ -51,7 +45,7 @@
                     for="descricao">{{showInputSearchEquipamento ? 'Buscar Equipamento': 'Equipamento'}}</label>
             </div>
             <div class="md:w-full flex relative items-center">
-                <app-accordion-equipamento class="flex-grow" [ngClass]="{'hidden': showInputSearchEquipamento}" [equipamento]="equipamentoRelacionado" [ocultarAcoes]="true"></app-accordion-equipamento>
+                <app-accordion-equipamento *ngIf="equipamentoRelacionado" class="flex-grow" [ngClass]="{'hidden': showInputSearchEquipamento}" [equipamento]="equipamentoRelacionado" [ocultarAcoes]="true"></app-accordion-equipamento>
                 <div class="bg-green-400 h-8 w-8 flex ml-2 rounded-md items-center justify-center cursor-pointer hover:bg-green-500" [ngClass]="{'hidden': showInputSearchEquipamento}" (click)="toggleShowInputSearch()">
                     <svg class="h-6 w-6 text-white"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -79,7 +73,7 @@
                     </div>
 
                 </div>
-                <div class="bg-red-400 h-8 w-8 flex ml-2 rounded-md items-center justify-center cursor-pointer hover:bg-red-500" [ngClass]="{'hidden': !showInputSearchEquipamento}" (click)="toggleShowInputSearch()">
+                <div class="bg-red-400 h-8 w-8 flex ml-2 rounded-md items-center justify-center cursor-pointer hover:bg-red-500" [ngClass]="{'hidden': !showInputSearchEquipamento || !equipamentoRelacionado}" (click)="toggleShowInputSearch()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -89,11 +83,11 @@
         </div>
 
         <div class="md:flex md:items-center flex justify-center md:justify-end">
-            <button [disabled]="alarmeForm.invalid" (click)="update()"
+            <button [disabled]="alarmeForm.invalid" (click)="create()"
                 [ngClass]="{'disabled:opacity-50 cursor-default': alarmeForm.invalid}"
                 class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-8 rounded"
                 type="button">
-                Update
+                Cadastrar
             </button>
         </div>
     </form>

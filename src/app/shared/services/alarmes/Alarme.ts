@@ -23,6 +23,12 @@ export interface Equipamento {
   tipo_id: number
   descricao: string
   creat_at: string
+  tipo: Tipo
+}
+
+export interface Tipo {
+  id: number
+  tipo: string
 }
 
 export interface Status {

@@ -1,12 +1,39 @@
 <table class="hidden md:block table-auto">
     <thead>
         <tr class="w-full bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-            <th class="py-3 px-6 text-left">id</th>
-            <th class="py-3 px-6 text-left">descrição</th>
-            <th class="py-3 px-6 text-center">Classificação</th>
-            <th class="py-3 px-6 text-center">Equipamento</th>
-            <th class="py-3 px-6 text-center">criado em</th>
-            <th class="py-3 px-6 text-center">Ações</th>
+            <th class="py-3 px-6 text-left ">
+                <div class="flex items-center">
+                    <span>id</span>
+                    <app-order-switcher ordenarPor="id" (aoAlterar)="getAlarmes($event)"></app-order-switcher>
+                </div>
+            </th>
+            <th class="py-3 px-6 text-left ">
+                <div class="flex items-center">
+                    <span>descrição</span>
+                    <app-order-switcher ordenarPor="descricao" (aoAlterar)="getAlarmes($event)"></app-order-switcher>
+                </div>
+            </th>
+            <th class="py-3 px-6 text-center ">
+                <div class="flex items-center">
+                    <span>Classificação</span>
+                    <app-order-menu [opcoes]="['Baixo','Medio','Alto']" (aoEscolher)="filtrarPorClassificacao($event)"></app-order-menu>
+                </div>
+            </th>
+            <th class="py-3 px-6 text-center ">
+                <div class="flex items-center">
+                    <span>Equipamento</span>
+                    <app-order-switcher ordenarPor="equipamento" (aoAlterar)="getAlarmes($event)"></app-order-switcher>
+                </div>
+            </th>
+            <th class="py-3 px-6 text-center ">
+                <div class="flex items-center">
+                    <span>criado em</span>
+                    <app-order-switcher ordenarPor="creat_at" (aoAlterar)="getAlarmes($event)"></app-order-switcher>
+                </div>
+            </th>
+            <th class="py-3 px-6 text-center ">
+                Ações
+            </th>
         </tr>
     </thead>
     <tbody class="text-gray-600 text-sm font-light">

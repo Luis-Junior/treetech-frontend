@@ -1,4 +1,4 @@
-<div class="fixed top-10 right-0 overflow-hidden z-50 mx-2 md:mx-0">
+<div class="fixed top-10 right-0 overflow-hidden mx-2 md:mx-0" [ngClass]="{'z-50' : show}">
     <div class="flex md:mr-8 transform duration-500 ease-in-out p-3 shadow-2xl rounded w-full md:w-80 max-h-20"
         [ngClass]="{'translate-x-0' : show, 'translate-x-200' : !show, 'bg-red-400' : tipo === 'danger', 'bg-yellow-400' : tipo === 'warn', 'bg-green-400' : tipo === 'success' }">
         <div class="bg-white flex items-center p-3 rounded mr-4 ring-2 ring-gray-300">

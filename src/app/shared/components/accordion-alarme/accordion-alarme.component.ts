@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { ToastType } from 'src/app/shared/components/toast/toast';
-import { ToastService } from 'src/app/shared/components/toast/toast.service';
-import { Alarme } from 'src/app/shared/services/alarmes/Alarme';
-import { AlarmesService } from 'src/app/shared/services/alarmes/alarmes.service';
+
+import { Alarme } from '../../services/alarmes/Alarme';
+import { AlarmesService } from '../../services/alarmes/alarmes.service';
+import { ToastType } from '../toast/toast';
+import { ToastService } from '../toast/toast.service';
+
 
 @Component({
   selector: 'app-accordion-alarme',

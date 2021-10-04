@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { environment } from 'src/environments/environment';
 import { Alarme } from '../alarmes/Alarme';
 import { Equipamento } from './Equipamento';
@@ -16,8 +17,8 @@ export class EquipamentosService {
   ) { }
 
 
-  getAll(){
-    return this.http.get<Equipamento[]>(API)
+  getAll(params?:HttpParams){
+    return this.http.get<Equipamento[]>(API,{params})
   }
 
   delete(id:number){
@@ -34,5 +35,17 @@ export class EquipamentosService {
   
   update(equipamento_id:number, equipamento:any){
     return this.http.put(`${API}/${equipamento_id}`, equipamento)
+  }
+
+  filterByName(params:HttpParams){
+    return this.http.get<Equipamento[]>(`${API}/filter`,{params})
+  }
+
+  create(equipamento:any){
+    return this.http.post(API, equipamento)
+  }
+  
+  filterByTipo(tipo_id:number){
+    return this.http.get<Equipamento[]>(`${API}/findByTipo/${tipo_id}`)
   }
 }

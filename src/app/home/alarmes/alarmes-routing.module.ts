@@ -1,3 +1,4 @@
+import { NovoAlarmeComponent } from './novo-alarme/novo-alarme.component';
 import { AlarmeResolver } from './alarme/alarme.resolver';
 import { AlarmeComponent } from './alarme/alarme.component';
 import { AlarmesComponent } from './alarmes.component';
@@ -10,6 +11,13 @@ const routes: Routes = [
     component:AlarmesComponent,
     data:{
       title: 'Listagem de alarmes' 
+    }
+  },
+  {
+    path:'novo',
+    component:NovoAlarmeComponent,
+    data:{
+      title: 'Novo alarme'
     }
   },
   {

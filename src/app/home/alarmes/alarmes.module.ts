@@ -1,30 +1,34 @@
-import { EquipamentosModule } from './../equipamentos/equipamentos.module';
+import { UtilsModule } from './../../shared/utils/utils.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AlarmesRoutingModule } from './alarmes-routing.module';
 import { AlarmesComponent } from './alarmes.component';
-import { AccordionAlarmeComponent } from './accordion-alarme/accordion-alarme.component';
-import { TabelaAlarmesComponent } from './tabela-alarmes/tabela-alarmes.component';
 import { AlarmeComponent } from './alarme/alarme.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AccordionAlarmeModule } from './../../shared/components/accordion-alarme/accordion-alarme.module';
+import { AccordionEquipamentoModule } from './../../shared/components/accordion-equipamento/accordion-equipamento.module';
+import { TabelaEquipamentosModule } from './../../shared/components/tabela-equipamentos/tabela-equipamentos.module';
+import { TabelaAlarmesModule } from './../../shared/components/tabela-alarmes/tabela-alarmes.module';
+import { NovoAlarmeComponent } from './novo-alarme/novo-alarme.component';
 
 
 @NgModule({
   declarations: [
     AlarmesComponent,
-    AccordionAlarmeComponent,
-    TabelaAlarmesComponent,
-    AlarmeComponent
+    AlarmeComponent,
+    NovoAlarmeComponent
   ],
   imports: [
     CommonModule,
     AlarmesRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
-  ],
-  exports:[
-    AccordionAlarmeComponent,
-    TabelaAlarmesComponent
+    TabelaAlarmesModule,
+    AccordionAlarmeModule,
+    TabelaEquipamentosModule,
+    AccordionEquipamentoModule,
+    UtilsModule
   ]
 })
 export class AlarmesModule { }

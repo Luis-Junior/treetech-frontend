@@ -1,8 +1,9 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { finalize } from 'rxjs/operators';
+
 import { EquipamentosService } from './../../../shared/services/equipamentos/equipamentos.service';
 import { ToastService } from './../../../shared/components/toast/toast.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Equipamento } from 'src/app/shared/services/equipamentos/Equipamento';
-import { finalize } from 'rxjs/operators';
 import { ToastType } from 'src/app/shared/components/toast/toast';
 
 @Component({
@@ -13,6 +14,8 @@ import { ToastType } from 'src/app/shared/components/toast/toast';
 export class AccordionEquipamentoComponent implements OnInit {
 
   @Input() equipamento!:Equipamento
+  @Input() ocultarAcoes = false
+
   @Output() aoExcluir = new EventEmitter<number>()
 
   opened = false

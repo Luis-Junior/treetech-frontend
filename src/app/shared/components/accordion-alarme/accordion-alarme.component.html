@@ -1,7 +1,7 @@
 <div class=" shadow-md rounded-md my-2">
     <div class="bg-gray-100 p-4 flex justify-between "
         [class]="opened ? 'rounded-tl-md rounded-tr-md':'rounded-md'">
-        <span class="font-medium" (click)="toggle()">ID: {{alarme.id}}</span>
+        <span class="font-medium cursor-pointer" (click)="toggle()">ID: {{alarme.id}}</span>
         <div class="flex items-center">
             <div class="h-5 w-5 transform hover:text-green-400 hover:scale-110" [routerLink]="['/alarmes',alarme.id]">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
