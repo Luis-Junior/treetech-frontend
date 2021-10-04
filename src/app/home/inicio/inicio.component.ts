@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Alarme } from 'src/app/shared/services/alarmes/Alarme';
+import { AlarmesService } from 'src/app/shared/services/alarmes/alarmes.service';
 
 @Component({
   selector: 'app-inicio',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
-  constructor() { }
+  alarmes:Alarme[] = []
+
+  constructor(
+    private alarmesService:AlarmesService
+  ) { }
 
   ngOnInit(): void {
+    this.alarmesService.alarmesMaisAtuados().subscribe(alarmes=> {
+      this.alarmes = alarmes
+    })
+
   }
 
 }

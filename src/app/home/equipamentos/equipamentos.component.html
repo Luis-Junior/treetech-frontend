@@ -9,9 +9,15 @@
 </div>
 <div class="flex justify-center">
     
-    <app-tabela-equipamentos [equipamentos]="equipamentos | filterEquipamento:filterByDescriptionInput.value" (aoExcluir)="getEquipamentos()"></app-tabela-equipamentos>
+    <app-tabela-equipamentos *ngIf="equipamentos.length; else semEquipamento" [equipamentos]="equipamentos | filterEquipamento:filterByDescriptionInput.value" (aoExcluir)="getEquipamentos()"></app-tabela-equipamentos>
+    <ng-template #semEquipamento>
+        <span class="font-medium text-lg mt-4 text-center">
+            Ainda não há equipamento cadastrado, <span [routerLink]="['/equipamentos/novo']" class="text-green-400 hover:text-green-500 hover:underline cursor-pointer">clique aqui e cadastre um novo</span>
+        </span>
+    </ng-template>
     
-    <div class="block md:hidden w-full">
+    
+    <div class="block md:hidden w-full" *ngIf="equipamentos.length;">
         <app-accordion-equipamento *ngFor="let equipamento of equipamentos | filterEquipamento:filterByDescriptionInput.value" [equipamento]="equipamento" (aoExcluir)="getEquipamentos()"></app-accordion-equipamento>
     </div>
 </div>

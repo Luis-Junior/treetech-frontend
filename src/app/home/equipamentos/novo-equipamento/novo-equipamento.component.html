@@ -45,15 +45,15 @@
                 <span class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">Tipo</span>
             </div>
             <div class="md:w-5/6 md:mx-12 flex justify-center">
-                <label [ngClass]="{'bg-dark ring-4 ring-red-400':equipamentoForm.get('tipo_id')?.value == 1}"
+                <label [ngClass]="{'bg-dark ring-4 ring-green-400':equipamentoForm.get('tipo_id')?.value == 1}"
                     for="tensao"
-                    class="flex-1 text-center bg-red-300 p-2 rounded-md text-white font-medium hover:bg-red-400 cursor-pointer">Tensão</label>
+                    class="flex-1 text-center bg-green-300 p-2 rounded-md text-white font-medium hover:bg-green-400 cursor-pointer">Tensão</label>
                 <label [ngClass]="{'bg-dark ring-4 ring-yellow-400':equipamentoForm.get('tipo_id')?.value == 2}"
                     for="corrente"
                     class="flex-1 text-center mx-2 bg-yellow-300 p-2 rounded-md text-white font-medium hover:bg-yellow-400 cursor-pointer">Corrente</label>
-                <label [ngClass]="{'bg-dark ring-4 ring-green-400':equipamentoForm.get('tipo_id')?.value == 3}"
+                <label [ngClass]="{'bg-dark ring-4 ring-red-400':equipamentoForm.get('tipo_id')?.value == 3}"
                     for="oleo"
-                    class="flex-1 text-center bg-green-300 p-2 rounded-md text-white font-medium hover:bg-green-400 cursor-pointer">Oleo</label>
+                    class="flex-1 text-center bg-red-300 p-2 rounded-md text-white font-medium hover:bg-red-400 cursor-pointer">Oleo</label>
             </div>
             <input class="hidden" type="radio" formControlName="tipo_id" value="1" id="tensao">
             <input class="hidden" type="radio" formControlName="tipo_id" value="2" id="corrente">

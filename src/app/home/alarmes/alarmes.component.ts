@@ -21,17 +21,14 @@ export class AlarmesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAlarmes()
-    this.filterByDescriptionInput.valueChanges.subscribe(
-      valorDigitado=>{
-        console.log(valorDigitado)
-      }
-    )
   }
 
   getAlarmes(){
     this.filterByDescriptionInput.setValue('')
     this.alarmesService.getAll()
-      .subscribe(alarmes=>this.alarmes=alarmes)
+      .subscribe(alarmes=>{
+        this.alarmes=alarmes
+      })
   }
 
 

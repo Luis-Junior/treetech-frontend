@@ -9,9 +9,13 @@
 </div>
 <div class="flex justify-center">
 
-    <app-tabela-alarmes [alarmes]="alarmes | filterAlarme:filterByDescriptionInput.value" (aoExcluir)="getAlarmes()"></app-tabela-alarmes>
-
-    <div class="block md:hidden w-full">
+    <app-tabela-alarmes *ngIf="alarmes.length; else semAlarme" [alarmes]="alarmes | filterAlarme:filterByDescriptionInput.value" (aoExcluir)="getAlarmes()"></app-tabela-alarmes>
+    <ng-template #semAlarme>
+        <span class="font-medium text-lg mt-4 text-center">
+            Ainda não há alarme cadastrado, <span [routerLink]="['/alarmes/novo']" class="text-green-400 hover:text-green-500 hover:underline cursor-pointer">clique aqui e cadastre um novo</span>
+        </span>
+    </ng-template>
+    <div class="block md:hidden w-full" *ngIf="alarmes.length;">
         <app-accordion-alarme *ngFor="let alarme of alarmes | filterAlarme:filterByDescriptionInput.value" [alarme]="alarme" (aoExcluir)="getAlarmes()"></app-accordion-alarme>
     </div>
 </div>

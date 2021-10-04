@@ -1,0 +1,42 @@
+<div class=" shadow-md rounded-md my-2">
+    <div class="bg-gray-100 p-4 flex justify-between "
+        [class]="opened ? 'rounded-tl-md rounded-tr-md':'rounded-md'">
+        <span class="font-medium cursor-pointer" (click)="toggle()">ID: {{alarme.id}}</span>
+        <div class="flex items-center">
+                <div class="flex item-center justify-center">
+                    <div (click)="toggleStatus(alarme.status_id, alarme.id)" class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                        <input type="checkbox" name="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" [ngClass]="{'border-green-500 right-0': alarme.status_id === 1}"/>
+                        <div  class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer" [ngClass]="{'bg-green-300': alarme.status_id === 1, 'bg-gray-300': alarme.status_id === 2}"></div>
+                    </div>
+                </div>
+            <div (click)="toggle()" class="transform hover:text-green-400 hover:scale-110 h-6 w-6 transition-all ease-in-out duration-500" [class]="!opened ? 'rotate-180':'text-green-400'">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class="transition-all ease-in-out duration-500 overflow-hidden max-h-0"
+        [class]="opened ? 'max-h-96':''">
+        <div class="flex justify-between px-4 py-2 border-b border-gray-200">
+            <span class="font-medium">Descrição</span>
+            <span>{{alarme.descricao}}</span>
+        </div>
+        <div class="flex justify-between px-4 py-2 border-b border-gray-200">
+            <span class="font-medium">Descricao equipamento</span>
+            <span>{{alarme.equipamento.descricao}}</span>
+        </div>
+        <div class="flex justify-between px-4 py-2 border-b border-gray-200">
+            <span class="font-medium">Entrada</span>
+            <span *ngIf="alarme.entrada">{{alarme.entrada | date: 'dd/MM/YYYY - h:mm'}}</span>
+            <span *ngIf="!alarme.entrada">Ainda não há entrada</span>
+        </div>
+        <div class="flex justify-between px-4 py-2 border-b border-gray-200">
+            <span class="font-medium">Saida</span>
+            <span *ngIf="alarme.saida">{{alarme.saida | date: 'dd/MM/YYYY - h:mm'}}</span>
+            <span *ngIf="!alarme.saida">Ainda não há saida</span>
+        </div>
+    </div>
+</div>

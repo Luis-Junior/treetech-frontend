@@ -20,11 +20,6 @@ export class EquipamentosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEquipamentos()
-    this.filterByDescriptionInput.valueChanges.subscribe(
-      valorDigitado=>{
-        console.log(valorDigitado)
-      }
-    )
   }
 
   getEquipamentos(){

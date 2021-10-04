@@ -40,4 +40,13 @@ export class AlarmesService {
     return this.http.get<Alarme[]>(`${API}/findByClassificacao/${classificacao_id}`)
   }
 
+  ativarAlarme(id:number){
+    return this.http.get(`${API}/ativarAlarme/${id}`)
+  }
+  desativarAlarme(id:number){
+    return this.http.get(`${API}/desativarAlarme/${id}`)
+  }
+  alarmesMaisAtuados(){
+    return this.http.get<Alarme[]>(`${API}/maisAtuados`)
+  }
 }

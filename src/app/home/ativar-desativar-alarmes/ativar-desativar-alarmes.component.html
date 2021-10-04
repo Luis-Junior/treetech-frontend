@@ -1,46 +1,105 @@
-<table class="md:block table-auto">
-    <thead>
-        <tr class="w-full bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-            <th class="py-3 px-6 text-left">Descrição Alarme</th>
-            <th class="py-3 px-6 text-left">Descrição Equipamento</th>
-            <th class="py-3 px-6 text-center">Entrada</th>
-            <th class="py-3 px-6 text-center">Saida</th>
-            <th class="py-3 px-6 text-center">Status</th>
-        </tr>
-    </thead>
-    <tbody class="text-gray-600 text-sm font-light">
-        <tr class="border-b border-gray-200 hover:bg-gray-100">
-            <td class="py-3 px-6 text-left whitespace-nowrap">
-                <div class="flex items-center">
-                    <span class="font-medium">Setimo alarme</span>
-                </div>
-            </td>
-            <td class="py-3 px-6 text-left">
-                <div class="flex items-center">
-                    <span>Equipamento 18</span>
-                </div>
-            </td>
-            <td class="py-3 px-6 text-left">
-                <div class="flex items-center">
-                    <span>01/10/2021 - 10:44</span>
-                </div>
-            </td>
-            
-            <td class="py-3 px-6 text-center">
-                <div class="flex item-center justify-center">
-                    01/10/2021 - 10:44
-                </div>
-            </td>
-            <td class="py-3 px-6 text-center">
-                <div class="flex item-center justify-center">
-                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                        <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
-                        <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-                    </div>
-                    <label for="toggle" class="text-xs text-gray-700"></label>
-                </div>
-            </td>
-        </tr>
 
-    </tbody>
-</table>
+<div class="md:flex md:justify-between md:items-center">
+    <h3 class="my-4 text-xl font-medium tracking-wider">Ativar/Desativar alarmes</h3>
+    <div class="flex flex-grow items-center md:flex-grow-0">
+        <svg [ngClass]="{'text-green-500': filterByDescriptionInput.value?.length}" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input [formControl]="filterByDescriptionInput" placeholder="Buscar" class="bg-gray-200 w-full appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500" id="" type="text">
+    </div>
+</div>
+<div class="flex justify-center">
+
+    <table class="hidden md:block table-auto" *ngIf="alarmes.length; else semAlarme">
+        <thead>
+            <tr class="w-full bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                <th class="py-3 px-6 text-left">
+                    <div class="flex items-center">
+                        <span>Descrição Alarme
+                        </span>
+                        <app-order-switcher ordenarPor="descricao" (aoAlterar)="getAlarmes($event)"></app-order-switcher>
+                    </div>
+                </th>
+                <th class="py-3 px-6 text-left">
+                    <div class="flex items-center">
+                        <span>Descrição Equipamento</span>
+                        <app-order-switcher ordenarPor="equipamentodescr" (aoAlterar)="getAlarmes($event)"></app-order-switcher>
+                    </div>
+                </th>
+                <th class="py-3 px-6 text-left">
+                    <div class="flex items-center">
+                        <span>Entrada</span>
+                        <app-order-switcher ordenarPor="entrada" (aoAlterar)="getAlarmes($event)"></app-order-switcher>
+                    </div>
+                </th>
+                <th class="py-3 px-6 text-left">
+                    <div class="flex items-center">
+                        <span>Saida</span>
+                        <app-order-switcher ordenarPor="saida" (aoAlterar)="getAlarmes($event)"></app-order-switcher>
+                    </div>
+                </th>
+                <th class="py-3 px-6 text-left">
+                    <div class="flex items-center">
+                        <span>Classificacao</span>
+                        <app-order-menu [opcoes]="['Baixo','Medio','Alto']" (aoEscolher)="filtrarPorClassificacao($event)"></app-order-menu>
+                    </div>
+                </th>
+                <th class="py-3 px-6 text-left">Status</th>
+            </tr>
+        </thead>
+        <tbody class="text-gray-600 text-sm font-light">
+            <tr *ngFor="let alarme of alarmes | filterAlarme:filterByDescriptionInput.value" class="border-b border-gray-200 hover:bg-gray-100">
+                <td class="py-3 px-6 text-left whitespace-nowrap">
+                    <div class="flex items-center">
+                        <span class="font-medium">{{alarme.descricao}}</span>
+                    </div>
+                </td>
+                <td class="py-3 px-6 text-left">
+                    <div class="flex items-center">
+                        <span>{{alarme.equipamento.descricao}}</span>
+                    </div>
+                </td>
+                <td class="py-3 px-6 text-left">
+                    <div class="flex items-center justify-center">
+                        <span *ngIf="alarme.entrada">{{alarme.entrada | date: 'dd/MM/YYYY - h:mm'}}</span>
+                        <span *ngIf="!alarme.entrada">Ainda não há entrada</span>
+                    </div>
+                </td>
+                
+                <td class="py-3 px-6 text-left">
+                    <div class="flex item-center justify-center">
+                        <span *ngIf="alarme.saida">{{alarme.saida | date: 'dd/MM/YYYY - h:mm'}}</span>
+                        <span *ngIf="!alarme.saida">Ainda não há saida</span>
+                        
+                    </div>
+                </td>
+                <td class="py-3 px-6 text-left">
+                    <div class="flex items-center justify-center">
+                        <span class="text-white font-medium py-1 px-3 rounded-full text-xs" 
+                        [ngClass]="{'bg-red-300' : alarme.classificacao.id === 3, 'bg-yellow-300' : alarme.classificacao.id === 2, 'bg-green-300' : alarme.classificacao.id === 1 }">
+                        {{alarme.classificacao.classificacao}}</span>
+                    </div>
+                </td>
+                <td class="py-3 px-6 text-center">
+                    <div class="flex item-center justify-center">
+                        <div (click)="switchAlarme(alarme.status_id, alarme.id)" class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                            <input type="checkbox" name="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" [ngClass]="{'border-green-500 right-0': alarme.status_id === 1}"/>
+                            <div  class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer" [ngClass]="{'bg-green-300': alarme.status_id === 1, 'bg-gray-300': alarme.status_id === 2}"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+    
+        </tbody>
+    </table>
+    <ng-template #semAlarme>
+        <span class="font-medium text-lg mt-4 text-center">
+            Ainda não há alarme cadastrado, <span [routerLink]="['/alarmes/novo']" class="text-green-400 hover:text-green-500 hover:underline cursor-pointer">clique aqui e cadastre um novo</span>
+        </span>
+    </ng-template>
+    <div class="block md:hidden w-full" *ngIf="alarmes.length;">
+        <app-accordion-desativar-atiavar-alarmes *ngFor="let alarme of alarmes | filterAlarme:filterByDescriptionInput.value" [alarme]="alarme" (aoAlterarStatus)="switchAlarme($event.status_id, $event.alarme_id)"></app-accordion-desativar-atiavar-alarmes>
+    </div>
+
+
+</div>

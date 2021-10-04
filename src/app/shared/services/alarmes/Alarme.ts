@@ -9,6 +9,8 @@ export interface Alarme {
   classificacao: Classificacao
   equipamento: Equipamento
   status: Status
+  entrada: string
+  saida: string
 }
 
 export interface Classificacao {
